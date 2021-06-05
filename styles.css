@@ -1,0 +1,18 @@
+  h2 {
+    color: blue;
+  }
+
+  .student {
+    background-color: lavender;
+  }
+
+  .student-form {
+    display: none;
+  }
+
+  .active {
+  background-color: green;
+  color: white;
+}
+
+  .show {display:block;}
