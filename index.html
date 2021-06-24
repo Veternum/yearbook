@@ -12,15 +12,22 @@
     </header>
 
     <br>
-
-    <div id="class-selector">
-      <button type="button" onclick="handleClassPickMIPA1(); ">MIPA 1</button>
-      <button type="button" onclick="handleClassPickMIPA2()">MIPA 2</button>
-      <button type="button" onclick="handleClassPickMIPA3()">MIPA 3</button>
-      <button type="button" onclick="handleClassPickIPS1()">IPS 1</button>
-      <button type="button" onclick="handleClassPickIPS2()">IPS 2</button>
-      <button type="button" onclick="handleClassPickIPB()">IPB</button>
-      <button type="button" onclick="handleClassPickMissingPeople()">Missing People</button>
+    
+    <div class="navbar">
+     <div class="dropdown">
+       <button class="dropbtn">Pilih Kelas 
+          <i class="fa fa-caret-down"></i>
+       </button>
+        <div id="class-selector">>
+          <a href="#" onclick="handleClassPickMIPA1()">MIPA 1</a>
+          <a href="#" onclick="handleClassPickMIPA2()">MIPA 2</a>
+          <a href="#" onclick="handleClassPickMIPA3()">MIPA 3</a>
+          <a href="#" onclick="handleClassPickIPS1()">IPS 1</a>
+          <a href="#" onclick="handleClassPickIPS2()">IPS 2</a>
+          <a href="#" onclick="handleClassPickIPB()">IPB</a>
+          <a href="#" onclick="handleClassPickMissingPeople()">Missing People</a>
+        </div>
+      </div> 
     </div>
 
     <div id="main">
