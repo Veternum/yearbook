@@ -1,135 +1,365 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <base target="_top">
     <link rel="stylesheet" href="styles.css">
+    <?!= includeStyleFile(); ?>
   </head>
-  <body>
-    <div>
-      <h1>E-Palancas</h1>
-    </div>
+  <body onload = "handleClassPickMIPA1()">
+    
+    <header>
+      <h1><b>E-Palancas</b></h1>
+    </header>
 
     <br>
 
-    <div>
-      <button type="button" onclick="handleClassPick('MIPA1')">MIPA 1</button>
-      <button type="button" onclick="handleClassPick('MIPA2')">MIPA 2</button>
-      <button type="button" onclick="handleClassPick('MIPA3')">MIPA 3</button>
-      <button type="button" onclick="handleClassPick('IPS1')">IPS 1</button>
-      <button type="button" onclick="handleClassPick('IPS2')">IPS 2</button>
-      <button type="button" onclick="handleClassPick('IPB')">IPB</button>
-      <button type="button" onclick="handleClassPick('missingPerson')">Missing Person</button>
+    <div id="class-selector">
+      <button type="button" onclick="handleClassPickMIPA1(); ">MIPA 1</button>
+      <button type="button" onclick="handleClassPickMIPA2()">MIPA 2</button>
+      <button type="button" onclick="handleClassPickMIPA3()">MIPA 3</button>
+      <button type="button" onclick="handleClassPickIPS1()">IPS 1</button>
+      <button type="button" onclick="handleClassPickIPS2()">IPS 2</button>
+      <button type="button" onclick="handleClassPickIPB()">IPB</button>
+      <button type="button" onclick="handleClassPickMissingPeople()">Missing People</button>
     </div>
 
-    <div id="student-container">
-      <? renderStudents("MIPA1") ?>
+    <div id="main">
 
-      <? for(let i = 0; i < studArr.length; i++) { ?>
-      <div class="student">
-        <h2><?!= studArr[i].id ?></h2>
-        <h2><?!= studArr[i].name ?></h2>
-        <button class="dropdown-btn">Dropdown</button>
-        <form class="student-form">
-          <label for="senderName">Nama Pengirim:</label>
-          <input type="text" id="senderName" name="fname" placeholder="kosongkan bila ingin menulis secara anonim">
-          <br><br>
+    <script>
+      function handleClassPickMIPA1() {
+        document.getElementById("main").innerHTML = "";
 
-          <label for="writtingsText">Isi Palancas:</label>
-          <textarea id="writtingsText" name="subject" placeholder="Isi Palancas.." style="height:200px"></textarea>
+        let studentContainer = document.createElement("DIV");
+        studentContainer.id = "student-container";
+        studentContainer.innerHTML =
+          `
+          <? renderStudents("MIPA 1") ?>
 
-          <br><br>
-          <button type="button" onclick="handleSubmit()">Kirim</button>
-          <label id="resp">test</label>
+          <? for(let i = 0; i < studArr.length; i++) { ?>
+          <div class="student">
 
-          <br><br>
-          <h2>Test upload file ke image database</h2>
+            <!-- virji boleh ubah v --!>
+            <div class="student-header">
+              <h2><?!= studArr[i].id + ". " + studArr[i].name?></h2>
+              <button class="dropdown-form" onclick="handleDropdown(this)">Tulis Palancas</button>
+            </div>
 
-          <br><br>
+            <!-- virji g blh ubah v --!>
+            <div class="student-form-container">
+              <form class="student-form">
+                <label for="senderName">Nama Pengirim:</label>
+                <input type="text" id="senderName" name="fname" placeholder="kosongkan bila ingin menulis secara anonim">
+                <br><br>
 
-          <input id="file" type="file" onchange="saveFile(this)">
-        <button type="button" id="sendFile" >Kirim</button>
+                <label for="writtingsText">Isi Palancas:</label>
+                <textarea id="writtingsText" name="subject" placeholder="Isi Palancas.." style="height:200px"></textarea>
+                <br><br>
 
-        </form>
-      </div>
-      <? }; ?>
+                <p>Apakah Anda ingin memasukan foto kedalam palancas?</p>
+                <input type="radio" id="iya" name="img-bool" value="iya" onchange="handleImgBool(this)">
+                <label for="iya">Iya</label><br>
+                <input type="radio" id="tidak" name="img-bool" value="tidak" onchange="handleImgBool(this)">
+                <label for="tidak">Tidak</label><br>
+                <br><br>
+
+                <div id="theme-container">test</div>
+                <br><br>
+
+                <div class="preview-container">
+                  <div class="slide-container">
+                    <div class="text-background">
+                        <div class="text-container">
+                              <p class="text">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                              </p>
+                              <p class="text">- anonim</p>
+                        </div>
+                    </div>
+                        <div class="image-background">
+                        <img src="https://mcdn.wallpapersafari.com/medium/77/32/gxYomi.jpg" alt="Girl in a jacket" class="image">  
+                        </div>
+                  </div>
+                </div>
+                
+                <button type="button" onclick="handleSubmit()">Kirim</button>
+                <label id="resp">test</label>
+                <br><br>
+
+                <h2>Test upload file ke image database</h2>
+
+                <br><br>
+
+                
+
+                <input id="file" type="file" onchange="saveFile(this)">
+                <button type="button" id="sendFile" >Kirim</button>
+              </form>
+              <div class="preview"></div>
+            </div>
+
+          </div>
+          <? }; ?>
+        `;
+        let container = document.getElementById("main");
+        container.appendChild(studentContainer);
+      };
+
+      function handleClassPickMIPA2() {
+        document.getElementById("main").innerHTML = "";
+
+        let studentContainer = document.createElement("DIV");
+        studentContainer.id = "student-container";
+        studentContainer.innerHTML =
+          `
+          <? renderStudents("MIPA 2") ?>
+
+          <? for(let i = 0; i < studArr.length; i++) { ?>
+          <div class="student">
+            <h2><?!= studArr[i].id + ". " + studArr[i].name?></h2>
+            <button class="dropdown-form">Dropdown</button>
+            <form class="student-form">
+              <label for="senderName">Nama Pengirim:</label>
+              <input type="text" id="senderName" name="fname" placeholder="kosongkan bila ingin menulis secara anonim">
+              <br><br>
+
+              <label for="writtingsText">Isi Palancas:</label>
+              <textarea id="writtingsText" name="subject" placeholder="Isi Palancas.." style="height:200px"></textarea>
+
+              <br><br>
+              <button type="button" onclick="handleSubmit()">Kirim</button>
+              <label id="resp">test</label>
+
+              <br><br>
+              <h2>Test upload file ke image database</h2>
+
+              <br><br>
+
+              <input id="file" type="file" onchange="saveFile(this)">
+            <button type="button" id="sendFile" >Kirim</button>
+
+            </form>
+          </div>
+          <? }; ?>
+        `;
+        let container = document.getElementById("main");
+        container.appendChild(studentContainer);
+      };
+
+      function handleClassPickMIPA3() {
+        document.getElementById("main").innerHTML = "";
+
+        let studentContainer = document.createElement("DIV");
+        studentContainer.id = "student-container";
+        studentContainer.innerHTML =
+          `
+          <? renderStudents("MIPA 3") ?>
+
+          <? for(let i = 0; i < studArr.length; i++) { ?>
+          <div class="student">
+            <h2><?!= studArr[i].id + ". " + studArr[i].name?></h2>
+            <button class="dropdown-form">Dropdown</button>
+            <form class="student-form">
+              <label for="senderName">Nama Pengirim:</label>
+              <input type="text" id="senderName" name="fname" placeholder="kosongkan bila ingin menulis secara anonim">
+              <br><br>
+
+              <label for="writtingsText">Isi Palancas:</label>
+              <textarea id="writtingsText" name="subject" placeholder="Isi Palancas.." style="height:200px"></textarea>
+
+              <br><br>
+              <button type="button" onclick="handleSubmit()">Kirim</button>
+              <label id="resp">test</label>
+
+              <br><br>
+              <h2>Test upload file ke image database</h2>
+
+              <br><br>
+
+              <input id="file" type="file" onchange="saveFile(this)">
+            <button type="button" id="sendFile" >Kirim</button>
+
+            </form>
+          </div>
+          <? }; ?>
+        `;
+        let container = document.getElementById("main");
+        container.appendChild(studentContainer);
+      };
+
+      function handleClassPickIPS1() {
+        document.getElementById("main").innerHTML = "";
+
+        let studentContainer = document.createElement("DIV");
+        studentContainer.id = "student-container";
+        studentContainer.innerHTML =
+          `
+          <? renderStudents("IPS 1") ?>
+
+          <? for(let i = 0; i < studArr.length; i++) { ?>
+          <div class="student">
+            <h2><?!= studArr[i].id + ". " + studArr[i].name?></h2>
+            <button class="dropdown-form">Dropdown</button>
+            <form class="student-form">
+              <label for="senderName">Nama Pengirim:</label>
+              <input type="text" id="senderName" name="fname" placeholder="kosongkan bila ingin menulis secara anonim">
+              <br><br>
+
+              <label for="writtingsText">Isi Palancas:</label>
+              <textarea id="writtingsText" name="subject" placeholder="Isi Palancas.." style="height:200px"></textarea>
+
+              <br><br>
+              <button type="button" onclick="handleSubmit()">Kirim</button>
+              <label id="resp">test</label>
+
+              <br><br>
+              <h2>Test upload file ke image database</h2>
+
+              <br><br>
+
+              <input id="file" type="file" onchange="saveFile(this)">
+            <button type="button" id="sendFile" >Kirim</button>
+
+            </form>
+          </div>
+          <? }; ?>
+        `;
+        let container = document.getElementById("main");
+        container.appendChild(studentContainer);
+      };
+
+      function handleClassPickIPS2() {
+        document.getElementById("main").innerHTML = "";
+
+        let studentContainer = document.createElement("DIV");
+        studentContainer.id = "student-container";
+        studentContainer.innerHTML =
+          `
+          <? renderStudents("IPS 2") ?>
+
+          <? for(let i = 0; i < studArr.length; i++) { ?>
+          <div class="student">
+            <h2><?!= studArr[i].id + ". " + studArr[i].name?></h2>
+            <button class="dropdown-form">Dropdown</button>
+            <form class="student-form">
+              <label for="senderName">Nama Pengirim:</label>
+              <input type="text" id="senderName" name="fname" placeholder="kosongkan bila ingin menulis secara anonim">
+              <br><br>
+
+              <label for="writtingsText">Isi Palancas:</label>
+              <textarea id="writtingsText" name="subject" placeholder="Isi Palancas.." style="height:200px"></textarea>
+
+              <br><br>
+              <button type="button" onclick="handleSubmit()">Kirim</button>
+              <label id="resp">test</label>
+
+              <br><br>
+              <h2>Test upload file ke image database</h2>
+
+              <br><br>
+
+              <input id="file" type="file" onchange="saveFile(this)">
+            <button type="button" id="sendFile" >Kirim</button>
+
+            </form>
+          </div>
+          <? }; ?>
+        `;
+        let container = document.getElementById("main");
+        container.appendChild(studentContainer);
+      };
+
+      function handleClassPickIPB() {
+        document.getElementById("main").innerHTML = "";
+
+        let studentContainer = document.createElement("DIV");
+        studentContainer.id = "student-container";
+        studentContainer.innerHTML =
+          `
+          <? renderStudents("IPB") ?>
+
+          <? for(let i = 0; i < studArr.length; i++) { ?>
+          <div class="student">
+            <h2><?!= studArr[i].id + ". " + studArr[i].name?></h2>
+            <button class="dropdown-form">Dropdown</button>
+            <form class="student-form">
+              <label for="senderName">Nama Pengirim:</label>
+              <input type="text" id="senderName" name="fname" placeholder="kosongkan bila ingin menulis secara anonim">
+              <br><br>
+
+              <label for="writtingsText">Isi Palancas:</label>
+              <textarea id="writtingsText" name="subject" placeholder="Isi Palancas.." style="height:200px"></textarea>
+
+              <br><br>
+              <button type="button" onclick="handleSubmit()">Kirim</button>
+              <label id="resp">test</label>
+
+              <br><br>
+              <h2>Test upload file ke image database</h2>
+
+              <br><br>
+
+              <input id="file" type="file" onchange="saveFile(this)">
+            <button type="button" id="sendFile" >Kirim</button>
+
+            </form>
+          </div>
+          <? }; ?>
+        `;
+        let container = document.getElementById("main");
+        container.appendChild(studentContainer);
+      };
+
+      function handleClassPickMissingPeople() {
+        document.getElementById("main").innerHTML = "";
+
+        let studentContainer = document.createElement("DIV");
+        studentContainer.id = "student-container";
+        studentContainer.innerHTML =
+          `
+          <? renderStudents("Missing People") ?>
+
+          <? for(let i = 0; i < studArr.length; i++) { ?>
+          <div class="student">
+            <h2><?!= studArr[i].id + ". " + studArr[i].name?></h2>
+            <button class="dropdown-form">Dropdown</button>
+            <form class="student-form">
+              <label for="senderName">Nama Pengirim:</label>
+              <input type="text" id="senderName" name="fname" placeholder="kosongkan bila ingin menulis secara anonim">
+              <br><br>
+
+              <label for="writtingsText">Isi Palancas:</label>
+              <textarea id="writtingsText" name="subject" placeholder="Isi Palancas.." style="height:200px"></textarea>
+
+              <br><br>
+              <button type="button" onclick="handleSubmit()">Kirim</button>
+              <label id="resp">test</label>
+
+              <br><br>
+              <h2>Test upload file ke image database</h2>
+
+              <br><br>
+
+              <input id="file" type="file" onchange="saveFile(this)">
+            <button type="button" id="sendFile" >Kirim</button>
+
+            </form>
+          </div>
+          <? }; ?>
+        `;
+        let container = document.getElementById("main");
+        container.appendChild(studentContainer);
+      };
+
+    </script>
+
     </div>
+    <?!= includeScriptFile(); ?>
+    <footer>
+      <p>Santa Ursula BSD</p>
+      <p>Tim Yearbook Angkatan 23</p>
 
-    <script>
-      function handleClassPick(studClass) {
-        let studArr = [];
-        let parent = getElementById("student-container")
-        parent.innerHTML = ""
-        /*
-        while (parent.firstChild) {
-          parent.removeChild(parent.firstChild);
-        };*/
-        let test = studClass;
-
-        google.script.run.renderStudents(studClass)
-      }
-    </script>
+    </footer>
 
 
-    <script>
-    /*
-      function handleDropdown() {
-        var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
-
-
-      }*/
-
-    var dropdown = document.getElementsByClassName("dropdown-btn");
-    var i;
-
-    for (i = 0; i < dropdown.length; i++) {
-      dropdown[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      /*var j:
-      for (j = 0; j < dropdown.length; j++) {
-        let dropdown2 = document.getElementsByClassName("dropdown-btn");
-        dropdown2[j].nextElementSibling.style.display = "none";
-      }*/
-      var dropdownContent = this.nextElementSibling;
-      if (dropdownContent.style.display === "block") {
-      dropdownContent.style.display = "none";
-      } else {
-      dropdownContent.style.display = "block";
-      }
-      });
-    }
-
-    </script>
-
-
-    <script>
-      function handleSubmit(destinationUrl) {
-        let message = document.getElementById("writtingsText").value
-        let sender = document.getElementById("senderName").value
-
-        if (sender == "") {
-          sender = "anonim"
-        }
-        
-        document.getElementById("resp").innerHTML = "Palancas Berhasil Dikirim";
-        alert("Palancas Berhasil Dikirim")
-        google.script.run.appendSlide(message, sender)//, destinationUrl);
-      }
-
-      function saveFile(f) {
-      const file = f.files[0];
-      const fr = new FileReader();
-      fr.onload = function(e) {
-        const obj = {
-          filename: file.name,
-          mimeType: file.type,
-          bytes: [...new Int8Array(e.target.result)]
-        };
-        document.getElementById("sendFile").addEventListener("click", google.script.run.withSuccessHandler(e => console.log(e)).saveFile(obj));
-        
-        };
-      fr.readAsArrayBuffer(file);
-      }
-    
-  </script>
   </body>
 </html>
