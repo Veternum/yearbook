@@ -1,5 +1,3 @@
-<script>
-    
     /*
     var dropdown = document.getElementsByClassName("dropdown-form");
     var i;
@@ -79,4 +77,3 @@
         };
       fr.readAsArrayBuffer(file);
       }
-  </script>
